@@ -198,6 +198,8 @@ input[type="password"],
 .plate,
 .card {
   background: v-bind(blockColorLocal) !important;
+  border-color: #323232;
+  border-width: thin;
 }
 .smile-st3 {
   fill: v-bind(blockColorLocal) !important;

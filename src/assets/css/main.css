@@ -914,6 +914,11 @@ img {
   justify-content: flex-end;
 }
 
+.plate {
+  border-color: #323232;
+  border-width: thin;
+}
+
 .plate-back {
   font-size: 22px;
   font-family: "Open Sans";

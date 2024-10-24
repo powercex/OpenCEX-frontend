@@ -213,8 +213,8 @@
         </div>
       </div>
       <MenuComponent />
-      <LanguageSelector />
-      <div
+      <!--<LanguageSelector />-->
+      <!--<div
         class="themeSelector"
         :class="{ dark: theme === 'dark' }"
         @click="changeTheme"
@@ -235,7 +235,7 @@
             </g>
           </g>
         </svg>
-      </div>
+      </div>-->
     </div>
   </header>
 </template>
@@ -247,12 +247,12 @@ import menuHelper from "~/mixins/menuHelper";
 import helpers from "~/mixins/helpers";
 import handleLogout from "~/mixins/handleLogout";
 import getFixedDecimal from "~/mixins/getFixedDecimal";
-import LanguageSelector from "~/components/layout/parts/LanguageSelector.vue";
+//import LanguageSelector from "~/components/layout/parts/LanguageSelector.vue";
 import { useCookies } from "vue3-cookies";
 
 export default {
   name: "HeaderComponent",
-  components: { LanguageSelector, MenuComponent },
+  components: { MenuComponent },
   mixins: [menuHelper, handleLogout, helpers, getFixedDecimal],
   props: {
     routeName: {
@@ -411,6 +411,8 @@ export default {
 
     & img {
       max-height: 48px;
+      height: 30px;
+      width: auto;
     }
 
     @media screen and (max-width: 675px) {
@@ -731,6 +733,7 @@ export default {
 .header--no-auth {
   .burger__text {
     display: initial;
+    color: #f0af1b;
   }
 }
 
@@ -764,6 +767,7 @@ export default {
   flex-wrap: wrap;
   text-align: center;
   height: 32px;
+  color: #f0af1b;
 }
 .author-list .author-list__link-icon {
   width: 30px;
