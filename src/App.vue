@@ -52,7 +52,7 @@ export default {
     let s = document.createElement("script");
     s.type = "text/javascript";
     s.async = true;
-    s.src = `https://api.sumsub.com/idensic/static/sumsub-kyc.js`;
+    s.src = `https://cdn.withpersona.com/dist/persona-v5.1.2.js`;
     let x = document.getElementsByTagName("script")[0];
     x.parentNode.insertBefore(s, x);
   },

@@ -1,5 +1,5 @@
 <template>
-  <div id="idensic"></div>
+  <div id="persona"></div>
 </template>
 
 <script>
@@ -17,58 +17,27 @@ export default {
     };
   },
   methods: {
-    renderKYC(aToken, user) {
-      if (!document.querySelector("#idensic")) return;
+    renderKYC(aToken) {
+      if (!document.querySelector("#persona")) return;
 
       /* eslint-disable */
-      const id = idensic.init(
-          "#idensic",
+      const self = this;
+      const client = new Persona.Client(
           {
-            clientId: "OpenCEX",
-            externalUserId: user,
-            accessToken: aToken,
-            navConf: {
-              skipWelcomeScreen: false,
-              skipAgreementsScreen: false,
-              skipReviewScreen: false,
-              registration: "disabled"
+            templateId: "itmpl_7mRzhf9SnfTowMr1EDF3juPN",
+            referenceId: aToken,
+            environmentId: "env_ainVvNXJyHgaF3daHC9ycYGN",
+            onReady: () => client.open(),
+	    onComplete: ({ inquiryId, status, fields }) => {
+            // Inquiry completed. Optionally tell your server about it.
+	         console.log(`Sending finished inquiry ${inquiryId} to backend`);
+		 self.$http.post("kyc_callback/", {token: aToken, inquiryId: inquiryId, status: status, fields: fields}).then(res => { console.log('done callback')})
             },
-            uiConf: {
-              customCss: "",
-              lang: localStorage.getItem("planguage") || "en",
-              steps: {
-                IDENTITY: {
-                  subTitle: ""
-                },
-                IDENTITY2: {
-                  subTitle: ""
-                },
-                SELFIE: {
-                  subTitle: ""
-                },
-                SELFIE2: {
-                  subTitle: "",
-                  videoRequired: "enabled"
-                },
-                PROOF_OF_RESIDENCE: {
-                  subTitle: ""
-                },
-                INVESTABILITY: {
-                  subTitle: ""
-                },
-                ACCREDITED_INVESTOR: {
-                  subTitle: ""
-                },
-                COMPANY: {
-                  subTitle: ""
-                },
-                E_SIGN: {
-                  subTitle: ""
-                }
-              }
-            }
-          },
-          function(messageType, payload) {
+            onCancel: ({ inquiryId, sessionToken }) => { 
+	         console.log('onCancel') 
+		 self.$http.post("kyc_callback/", {token: aToken, inquiryId:inquiryId, status:'cancel'}).then(res => { console.log('done callback')})
+	    },
+	    onError: (error) => console.log(error),
           }
       );
     }
