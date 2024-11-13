@@ -21,10 +21,7 @@ export default (precision = null) => {
       setTimeout(() => cb(config), 0);
     },
     resolveSymbol: (symbolName, onSymbolResolvedCallback) => {
-      var projectTitle = localStorage.getItem("project_title");
-      if (!projectTitle) {
-        projectTitle = "Crypto exchange";
-      }
+      //var projectTitle = localStorage.getItem("project_title");
       var symbolStub = {
         name: symbolName,
         description: "",
@@ -33,7 +30,7 @@ export default (precision = null) => {
         timezone: "Etc/UTC",
         has_empty_bars: true,
         ticker: symbolName,
-        exchange: projectTitle,
+        exchange: "",
         minmov: 1,
         pricescale: Math.round(1 / (precision || 0.01)),
         has_intraday: true,
